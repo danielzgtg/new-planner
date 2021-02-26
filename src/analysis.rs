@@ -8,11 +8,7 @@ pub fn print_analysis(courses: Vec<Course>) {
                 batches.push((course.course_code, batch))
             }
         }
-        batches.sort_by(|a, b|
-            a.1.evaluation_time
-                .cmp(b.1.evaluation_time)
-                .then_with(|| a.0.cmp(b.0))
-        );
+        batches.sort_unstable_by_key(|x| (x.1.evaluation_time, x.0));
         batches
     };
     if batches.len() == 0 {
@@ -47,5 +43,7 @@ pub fn print_analysis(courses: Vec<Course>) {
                  batch.1.evaluation_desc,
         );
     }
-    println!("... and {} more evaluation(s)", batches.len() - 3);
+    if let Some(more) = batches.len().checked_sub(3 + 1) {
+        println!("... and {} more evaluation(s)", more + 1);
+    }
 }
