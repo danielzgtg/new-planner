@@ -26,7 +26,7 @@ fn parse_data(raw: &LoadedRaw) -> Course {
                 x => Some(x),
             };
             desc = split.next().expect("desc");
-            split.next().unwrap_none();
+            assert!(split.next().is_none());
         }
         match time {
             None => learning_descs.push(desc),
@@ -43,7 +43,7 @@ fn parse_data(raw: &LoadedRaw) -> Course {
             },
         }
     }
-    learning_descs.first().expect_none("Must have exam after all the studying");
+    assert!(learning_descs.first().is_none(), "Must have exam after all the studying");
     batches.first().expect("You probably don't have empty courses");
     Course {
         course_code: &raw.course_code,

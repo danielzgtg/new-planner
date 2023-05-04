@@ -1,3 +1,3 @@
 # new-planner
 
-An earliest-deadline-first scheduler for university students.
+An old attempt at earliest-deadline-first scheduler for university students.
